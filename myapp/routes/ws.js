@@ -6,7 +6,9 @@ var router = express.Router();
  
 router.ws('/', function(ws, req) {
   ws.on('message', function(msg) {
-    ws.send(msg);
+    // ws.send(msg);
+    ws.send('hello client')
+    console.log("hello ws")
   });
 });
 
