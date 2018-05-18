@@ -6,7 +6,7 @@ var logger = require('morgan');
 var expressWs = require('express-ws');
 var bodyParser = require('body-parser');
 
-
+var db = require('./db');
 
 
 var indexRouter = require('./routes/index');
