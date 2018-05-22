@@ -7,7 +7,7 @@ class GoodsHelper {
         this.getAllGoods = this.getAllGoods.bind(this);
     }
 
-    async addGoods(req, res, next) {
+    async addGoodes_dev(req, res, next) {
         try {
             let json = req.body.data;
             await json.forEach(element => {
@@ -28,16 +28,44 @@ class GoodsHelper {
         }
     }
 
-    async deleteGoods(req, res ,next) {
+    async addGoods(req, res, next) {
         try {
-            GoodsModel.findOneAndRemove({id: req.params.id}, function(err, doc){
-                console.log('成功删除：')
+            let data = await req.body.data;
+            console.log(data);
+            GoodsModel.create(data, function(err, doc){
+                console.log('商品添加成功')
                 console.log(doc.toJSON());
             });
             res.send({
                 status: 200,
-                message: '删除成功'
+                message: '添加成功'
             })
+        } catch(err) {
+            console.log(err);
+            res.send({
+                status: -1,
+                message: '添加失败'
+            })
+        }
+    }
+
+    async deleteGoods(req, res ,next) {
+        try {
+            GoodsModel.findOneAndRemove({id: req.params.id}, function(err, doc){
+                if (doc){
+                    console.log('成功删除：')
+                    console.log(doc.toJSON());
+                    res.send({
+                        status: 200,
+                        message: '删除成功'
+                    })
+                }else {
+                    console.log('删除失败');
+                    res.send({
+                        status: -1
+                    });
+                }
+            });
         } catch(err) {
             console.log(err);
             res.send({
