@@ -9,5 +9,6 @@ router.get('/', function(req, res, next) {
 
 router.post('/addgoods', goodsHelper.addGoods);  //添加商品
 router.get('/allgoods',goodsHelper.getAllGoods); //获取所有商品
+router.get('/delgoods/:id', goodsHelper.deleteGoods);//删除商品byid
 
 module.exports = router;

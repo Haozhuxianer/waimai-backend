@@ -4,6 +4,7 @@ class GoodsHelper {
     constructor() {
         this.addGoods = this.addGoods.bind(this);
         this.deleteGoods = this.deleteGoods.bind(this);
+        this.getAllGoods = this.getAllGoods.bind(this);
     }
 
     async addGoods(req, res, next) {
@@ -18,7 +19,7 @@ class GoodsHelper {
                     price: element.price
                 }
                 new GoodsModel(createData).save();
-                console.log(createData);
+                // console.log(createData);
             });
             res.send(200);
         } catch(err) {
@@ -27,8 +28,27 @@ class GoodsHelper {
         }
     }
 
-    async deleteGoods(req, res , next) {
-        
+    async deleteGoods(req, res ,next) {
+        try {
+            GoodsModel.findOneAndRemove({id: req.params.id}, function(err, doc){
+                console.log('成功删除：')
+                console.log(doc.toJSON());
+            });
+            res.send({
+                status: 200,
+                message: '删除成功'
+            })
+        } catch(err) {
+            console.log(err);
+            res.send({
+                status: -1,
+                message: '删除失败'
+            })
+        }
+    }
+
+    async updateGoods(req, res, next) {
+
     }
 
     async getAllGoods(req, res, next) {
