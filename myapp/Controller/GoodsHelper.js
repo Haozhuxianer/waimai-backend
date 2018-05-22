@@ -76,7 +76,35 @@ class GoodsHelper {
     }
 
     async updateGoods(req, res, next) {
-
+        try{
+            let data = req.body.data;
+            GoodsModel.update({id: data.id}, {
+                imageurl: data.imageurl,
+                title: data.title,
+                subtitle: data.subtitle,
+                price: data.price
+            }, function(err, raw){
+                if(raw){
+                    console.log('更新成功');
+                    res.send({
+                        status: 200,
+                        message: '更新成功'
+                    })
+                }else {
+                    console.log('更新失败');
+                    res.send({
+                        status: -1,
+                        message: '更新失败'
+                    })
+                }
+            });
+        }catch(err){
+            console.log('更新失败');
+                    res.send({
+                        status: -1,
+                        message: '更新失败'
+                    })
+        }
     }
 
     async getAllGoods(req, res, next) {
