@@ -77,7 +77,7 @@ class GoodsHelper {
 
     async updateGoods(req, res, next) {
         try{
-            let data = req.body.data;
+            let data = req.body;
             GoodsModel.update({id: data.id}, {
                 imageurl: data.imageurl,
                 title: data.title,
