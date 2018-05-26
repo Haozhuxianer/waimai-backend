@@ -30,7 +30,7 @@ class GoodsHelper {
 
     async addGoods(req, res, next) {
         try {
-            let data = await req.body.data;
+            let data = await req.body;
             console.log(data);
             GoodsModel.create(data, function(err, doc){
                 console.log('商品添加成功')
