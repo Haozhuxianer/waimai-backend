@@ -4,6 +4,7 @@ var goodsHelper = require('../Controller/GoodsHelper');
 var multipart = require('connect-multiparty');
 var multipartMiddileware = multipart();
 var fileHelper = require('../Controller/FileHelper');
+var aWss = require('./ws').aWss;
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -17,4 +18,13 @@ router.post('/addnewgoods', goodsHelper.addGoods); //添加新商品
 router.post('/updategoods', goodsHelper.updateGoods);//更新商品信息
 
 router.post('/upload',multipartMiddileware ,fileHelper.uploadImage);//图片上传
+
+router.get('/order', function(req, res, next){
+  let orderInfo  = req.body;
+  console.log(aWss.clients.size);
+  aWss.clients.forEach(function(client){
+    client.send("orderInfo");
+  })
+  res.send(200);
+})
 module.exports = router;

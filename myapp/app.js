@@ -11,7 +11,7 @@ var db = require('./db');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-var wsRouter = require('./routes/ws');
+var wsRouter = require('./routes/ws').router;
 
 
 var expressWs = expressWs(express());

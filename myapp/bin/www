@@ -24,7 +24,8 @@ app.set('port', port);
  */
 
 var server = http.createServer(app);
-var ws = new WSRouter(app, server);
+var wsRouter = new WSRouter(app, server);
+global.aWss = wsRouter.getInstance();
 /**
  * Listen on provided port, on all network interfaces.
  */
@@ -94,6 +95,7 @@ function onListening() {
     : 'port ' + addr.port;
   debug('Listening on ' + bind);
 }
+
 
 
 
