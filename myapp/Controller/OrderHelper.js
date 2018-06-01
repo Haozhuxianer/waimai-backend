@@ -8,6 +8,7 @@ class OrderHelper {
         this.updateOrderStatus = this.updateOrderStatus.bind(this);
         this.deleteOrder = this.deleteOrder.bind(this);
         this.getOrders = this.getOrders.bind(this);
+        this.getNonOrder = this.getNonOrder.bind(this);
     }
 
     async transmitOrder(req, res, next) {
@@ -139,6 +140,16 @@ class OrderHelper {
         }catch(err){
             console.log(err)
             res.send(-1)
+        }
+    }
+
+    async getNonOrder(req, res, next) {
+        try{
+            OrderModel.find({status: 0},function(err, orders){
+                res.send(orders)
+            })
+        }catch(err){
+            console.log(err)
         }
     }
 }

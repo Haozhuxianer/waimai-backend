@@ -22,7 +22,8 @@ router.post('/upload',multipartMiddileware ,fileHelper.uploadImage);//图片上�
 
 router.post('/order', orderHelper.transmitOrder);// 转发order 给商户端
 router.post('/createorder', orderHelper.createOrder);//用户端创建订单
-router.post('/updateOrderStatus',orderHelper.updateOrderStatus)
-router.get('/getOrder', orderHelper.getOrders)
-router.get('/deleteOrder/:id', orderHelper.deleteOrder)
+router.post('/updateOrderStatus',orderHelper.updateOrderStatus);
+router.get('/getOrder', orderHelper.getOrders);
+router.get('/deleteOrder/:id', orderHelper.deleteOrder);
+router.get('/getNonOrder', orderHelper.getNonOrder);
 module.exports = router;
